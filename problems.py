@@ -1,4 +1,3 @@
-from Number import Number
 import helpers
 import cProfile
 
@@ -9,10 +8,9 @@ def problem01():
     A: 233168
     '''
     sum = 0
-    for i in range(999, 0, -1):
-        num = Number(i)
-        if num.is_divisible_by(5) or num.is_divisible_by(3):
-            sum += num.number_as_int
+    for num in range(999, 0, -1):
+        if helpers.is_divisible_by(num, 5) or helpers.is_divisible_by(num, 3):
+            sum += num
     # print(sum)
     return sum
 
@@ -36,11 +34,11 @@ def problem03():
     Q: What is the largest prime factor of the number 600851475143?
     A: 6857
     '''
-    n = Number(600851475143)
-    factors = n.get_factors()
+    n = 600851475143
+    factors = helpers.get_factors(n)
     largest = 0
     for factor in factors:
-        if factor != n.number_as_int and factor > largest and Number(factor).is_prime():
+        if factor != n and factor > largest and helpers.is_prime(factor):
             largest = factor
     # print(largest)
     return largest
@@ -58,9 +56,8 @@ def problem04():
             product = num*n
             if product < largest:
                 continue
-            product = Number(product)
-            if product.is_palindrome():
-                largest = product.number_as_int
+            if helpers.is_palindrome(product):
+                largest = product
     # print(largest)
     return largest
 
@@ -249,7 +246,6 @@ def main():
     print(" Problem  09:", problem09())
     print(" Problem  10:", problem10())
     print(" Problem  11:", problem11())
-    print(" Problem  12:", problem12())
     print("----------------------------")
 
 main()

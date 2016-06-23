@@ -1,4 +1,5 @@
-from Number import Number
+from math import sqrt
+from functools import reduce
 
 
 def generate_fibonacci_sequence(limit):
@@ -19,11 +20,57 @@ def add_all(list_of_numbers):
     return result
 
 
+def is_even(number):
+    if number % 2 == 0:
+        return True
+    else:
+        return False
+
+
+def is_odd(number):
+    if number % 2 != 0:
+        return True
+    else:
+        return False
+
+
+def is_divisible_by(a, b):
+    if a % b == 0:
+        return True
+    else:
+        return False
+
+
+def is_prime(number):
+    start = 2
+    end = int(sqrt(number))+1
+    for i in range(start, end):
+        if number % i == 0:
+            return False
+        else:
+            continue
+    return True
+
+
+def is_palindrome(number):
+    number_as_str = str(number)
+    if number_as_str == number_as_str[::-1]:
+        return True
+    else:
+        return False
+
+
+def get_factors(n):
+    step = 2 if n%2 else 1
+    return list(reduce(list.__add__,
+                ([i, n//i] for i in range(1, int(sqrt(n))+1, step) if n % i == 0)))
+
+
 def filter_list(unfiltered_list, attribute):
     if attribute == 'even':
-        return [i for i in unfiltered_list if Number(i).is_even() == True]
+        return [i for i in unfiltered_list if is_even(i) == True]
     elif attribute == 'odd':
-        return [i for i in unfiltered_list if Number(i).is_odd() == True]
+        return [i for i in unfiltered_list if is_odd(i) == True]
 
 
 def pythagorean(a, b, c):
@@ -34,8 +81,9 @@ def create_txt_of_primes(limit):
     with open('primes.txt', 'w') as outfile:
         outfile.write(str(2) + '\n')
         for num in range(3, limit, 2):
-            if Number(num).is_prime():
+            if is_prime(num):
                 outfile.write(str(num) + '\n')
+
 
 def get_set_of_primes(parameter_type, value):
     with open('primes.txt') as infile:
