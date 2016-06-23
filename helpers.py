@@ -98,5 +98,7 @@ def get_set_of_primes(parameter_type, value):
             f = infile.read().splitlines()
             primes_txt = [int(line) for line in f]
             primes = set(primes_txt[0:value])
+        elif parameter_type = 'none':
+            primes = set(infile.readlines())
 
     return primes
