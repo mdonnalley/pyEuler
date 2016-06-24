@@ -233,6 +233,28 @@ def problem11():
     return max_product
 
 
+def problem12():
+    '''
+    Q: What is the value of the first triangle number to have over five hundred
+    divisors?
+    A: 76576500
+    '''
+
+    primes = helpers.get_set_of_primes(parameter_type='all', value=None)
+    index = 25
+    number_of_divisors = 0
+    while number_of_divisors < 500:
+        index += 25
+        triangle_number = helpers.triangular_number(index)
+        if triangle_number % 2 != 0:
+            continue
+        prime_factors = helpers.get_prime_factors(triangle_number, primes)
+        number_of_divisors = helpers.get_number_of_divisors(prime_factors)
+
+    # print(triangle_number)
+    return int(triangle_number)
+
+
 def main():
     print("------ Project Euler ------")
     print(" Problem  01:", problem01())
@@ -246,11 +268,12 @@ def main():
     print(" Problem  09:", problem09())
     print(" Problem  10:", problem10())
     print(" Problem  11:", problem11())
+    print(" Problem  12:", problem12())
     print("----------------------------")
 
 main()
 
 # FOR TESTING:
 # cProfile.run('main()')
-# cProfile.run('problem10()')
+# cProfile.run('problem12()')
 # problem12()

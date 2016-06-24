@@ -1,6 +1,6 @@
 from math import sqrt
 from functools import reduce
-
+from bisect import bisect_right
 
 def generate_fibonacci_sequence(limit):
     sequence = [1, 2]
@@ -52,6 +52,13 @@ def is_prime(number):
     return True
 
 
+def is_whole(number):
+    if number % 1 == 0:
+        return True
+    else:
+        return False
+
+
 def is_palindrome(number):
     number_as_str = str(number)
     if number_as_str == number_as_str[::-1]:
@@ -95,10 +102,57 @@ def get_set_of_primes(parameter_type, value):
                 if prime <= value:
                     primes.add(prime)
         elif parameter_type == 'count':
-            f = infile.read().splitlines()
-            primes_txt = [int(line) for line in f]
+            primes_txt = list(map(int, infile.read().splitlines()))
             primes = set(primes_txt[0:value])
-        elif parameter_type = 'none':
-            primes = set(infile.readlines())
+        elif parameter_type == 'all':
+            primes = list(map(int, infile.read().splitlines()))
 
     return primes
+
+
+def find_nearest_prime(primes, x):
+    'Find leftmost value greater than x'
+    i = bisect_right(primes, x)
+    if i != len(primes):
+        return primes[i]
+    raise ValueError
+
+
+def get_prime_factors(number, primes):
+    factors = []
+    square_root = int(sqrt(number))
+    end = find_nearest_prime(primes, square_root)
+    end = primes.index(end)
+    subset = primes[0:end]
+    for prime in subset:
+        if number % prime != 0:
+            continue
+
+        quotient = number/prime
+
+        while quotient % 1 == 0:
+            if number % quotient == 0:
+                factors.append(prime)
+            quotient /= prime
+
+    return factors
+
+
+def consolidate_prime_factors(factors):
+    output = dict()
+    for factor in factors:
+        output[str(factor)] = factors.count(factor)
+    return output
+
+
+def get_number_of_divisors(prime_factors):
+    prime_factors_dict = consolidate_prime_factors(prime_factors)
+    number_of_divisors = 1
+    for key in prime_factors_dict:
+        count = prime_factors_dict[key] + 1
+        number_of_divisors *= count
+    return number_of_divisors
+
+
+def triangular_number(number):
+    return (number * (number + 1)) / 2
