@@ -247,6 +247,37 @@ def problem13():
     return first_10_digits
 
 
+def problem14():
+    '''
+    Q: Which starting number, under one million, produces the longest chain?
+    A: 837799
+    '''
+    largest = {'start': 0, 'count': 0}
+    cache = {}
+    for num in range(0,1000000):
+        count = 1
+        start = num
+        while num > 1:
+            if num in cache:
+                count += cache[num] - 1
+                break
+            if num % 2 == 0:
+                num /= 2
+            else:
+                num = (3 * num) + 1
+            count += 1
+
+        if count > largest['count']:
+            largest['count'] = count
+            largest['start'] = start
+
+        cache[start] = count
+
+    # print(largest['start'])
+    return largest['start']
+
+
+
 def main():
     print("------ Project Euler ------")
     print(" Problem  01:", problem01())
@@ -262,6 +293,7 @@ def main():
     print(" Problem  11:", problem11())
     print(" Problem  12:", problem12())
     print(" Problem  13:", problem13())
+    print(" Problem  14:", problem14())
     print("----------------------------")
 
 
@@ -269,5 +301,5 @@ main()
 
 # FOR TESTING:
 # cProfile.run('main()')
-# cProfile.run('problem13()')
-# problem13()
+# cProfile.run('problem14()')
+# problem14()

@@ -21,17 +21,11 @@ def add_all(list_of_numbers):
 
 
 def is_even(number):
-    if number % 2 == 0:
-        return True
-    else:
-        return False
+    return (number % 2 == 0)
 
 
 def is_odd(number):
-    if number % 2 != 0:
-        return True
-    else:
-        return False
+    return (number % 2 != 0)
 
 
 def is_divisible_by(a, b):
