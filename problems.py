@@ -287,28 +287,45 @@ def problem15():
     return grid[20 - 1]
 
 
+def problem16():
+    """
+    Q: What is the sum of the digits of the number 2^1000?
+    A: 1366
+    """
+    power_digits = str(2**1000)
+    total_sum = 0
+    for digit in power_digits:
+        total_sum += int(digit)
+    return total_sum
+
+
 def main():
     print("------ Project Euler ------")
-    print(" Problem  01:", problem01())
-    print(" Problem  02:", problem02())
-    print(" Problem  03:", problem03())
-    print(" Problem  04:", problem04())
-    print(" Problem  05:", problem05())
-    print(" Problem  06:", problem06())
-    print(" Problem  07:", problem07())
-    print(" Problem  08:", problem08())
-    print(" Problem  09:", problem09())
-    print(" Problem  10:", problem10())
-    print(" Problem  11:", problem11())
-    print(" Problem  12:", problem12())
-    print(" Problem  13:", problem13())
-    print(" Problem  14:", problem14())
-    print(" Problem  15:", problem15())
+    print(" Problem 01:", problem01())
+    print(" Problem 02:", problem02())
+    print(" Problem 03:", problem03())
+    print(" Problem 04:", problem04())
+    print(" Problem 05:", problem05())
+    print(" Problem 06:", problem06())
+    print(" Problem 07:", problem07())
+    print(" Problem 08:", problem08())
+    print(" Problem 09:", problem09())
+    print(" Problem 10:", problem10())
+    print(" Problem 11:", problem11())
+    print(" Problem 12:", problem12())
+    print(" Problem 13:", problem13())
+    print(" Problem 14:", problem14())
+    print(" Problem 15:", problem15())
+    print(" Problem 16:", problem16())
     print("----------------------------")
 
 
 def test_problem(number, profile=False):
-    problem_string = 'problem{number}()'.format(number=number)
+    if number == 'main()':
+        problem_string = number
+    else:
+        problem_string = 'problem{number}()'.format(number=number)
+
     if profile:
         import cProfile
         cProfile.run(problem_string)
@@ -317,4 +334,3 @@ def test_problem(number, profile=False):
 
 
 main()
-# test_problem('15')
