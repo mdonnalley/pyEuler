@@ -2,6 +2,7 @@ from math import sqrt
 from functools import reduce
 from bisect import bisect_right
 
+
 def generate_fibonacci_sequence(limit):
     sequence = [1, 2]
     while sequence[-1] < limit:
@@ -21,11 +22,11 @@ def add_all(list_of_numbers):
 
 
 def is_even(number):
-    return (number % 2 == 0)
+    return number % 2 == 0
 
 
 def is_odd(number):
-    return (number % 2 != 0)
+    return number % 2 != 0
 
 
 def is_divisible_by(a, b):
@@ -62,7 +63,7 @@ def is_palindrome(number):
 
 
 def get_factors(n):
-    step = 2 if n%2 else 1
+    step = 2 if n % 2 else 1
     return list(reduce(list.__add__,
                 ([i, n//i] for i in range(1, int(sqrt(n))+1, step) if n % i == 0)))
 
@@ -100,12 +101,13 @@ def get_set_of_primes(parameter_type, value):
             primes = set(primes_txt[0:value])
         elif parameter_type == 'all':
             primes = list(map(int, infile.read().splitlines()))
+        else:
+            primes = None
 
     return primes
 
 
 def find_nearest_prime(primes, x):
-    'Find leftmost value greater than x'
     i = bisect_right(primes, x)
     if i != len(primes):
         return primes[i]
