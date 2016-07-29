@@ -272,6 +272,21 @@ def problem14():
     return largest['start']
 
 
+def problem15():
+    """
+    Q: Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are
+    exactly 6 routes to the bottom right corner. How many such routes are there through a 20×20 grid?
+    A: 137846528820
+    """
+    grid = [1] * 20
+    for i in range(20):
+        for j in range(i):
+            grid[j] += grid[j-1]
+        grid[i] = 2 * grid[i-1]
+
+    return grid[20 - 1]
+
+
 def main():
     print("------ Project Euler ------")
     print(" Problem  01:", problem01())
@@ -288,6 +303,7 @@ def main():
     print(" Problem  12:", problem12())
     print(" Problem  13:", problem13())
     print(" Problem  14:", problem14())
+    print(" Problem  15:", problem15())
     print("----------------------------")
 
 
@@ -300,5 +316,5 @@ def test_problem(number, profile=False):
         print(eval(problem_string))
 
 
-# main()
-test_problem('14')
+main()
+# test_problem('15')
