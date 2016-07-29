@@ -1,1 +1,4 @@
 __pycache__/
+.idea/
+helpers.pyc
+problem_setup.pyc
