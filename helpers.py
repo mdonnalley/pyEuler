@@ -152,3 +152,60 @@ def get_number_of_divisors(prime_factors):
 
 def triangular_number(number):
     return (number * (number + 1)) / 2
+
+
+def convert_to_characters(num, index, original_number):
+
+    characters = {
+        '1': {
+                '0': '',
+                '1': 'one',
+                '2': 'two',
+                '3': 'three',
+                '4': 'four',
+                '5': 'five',
+                '6': 'six',
+                '7': 'seven',
+                '8': 'eight',
+                '9': 'nine'
+            },
+        '2': {
+                '0': '',
+                '1': 'ten',
+                '2': 'twenty',
+                '3': 'thirty',
+                '4': 'fourty',
+                '5': 'fifty',
+                '6': 'sixty',
+                '7': 'seventy',
+                '8': 'eighty',
+                '9': 'ninety'
+            },
+        '3': {
+                '0': '',
+                '1': 'onehundred',
+                '2': 'twohundred',
+                '3': 'threehundred',
+                '4': 'fourhundred',
+                '5': 'fivehundred',
+                '6': 'sixhundred',
+                '7': 'sevenhundred',
+                '8': 'eighthundred',
+                '9': 'ninehundred'
+            },
+        '4': {
+                '0': '',
+                '1': 'onethousand'
+            }
+    }
+
+    out = characters[str(index)][num]
+
+    # IF triple digit original number,
+    # AND original number is not 100, 200, 300, etc
+    # AND processing index 2 number
+    # THEN add 'and' to output
+    if len(original_number) == 3 and int(original_number) % 100 != 0 and index == 2:
+        return 'and' + out
+    else:
+        return out

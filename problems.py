@@ -302,7 +302,7 @@ def problem17():
     """
     Q: If all the numbers from 1 to 1000 (one thousand) inclusive were written
     out in words, how many letters would be used?
-    A:
+    A: 21224
     """
     special_cases = {
         '11': 'eleven',
@@ -330,70 +330,13 @@ def problem17():
 
             idx = len(number_to_iterate)
             for digit in number_to_iterate:
-                full_number += convert_to_characters(digit, idx)
+                full_number += helpers.convert_to_characters(num=digit, index=idx, original_number=number)
                 idx -= 1
 
-        print(full_number)
         all_characters += full_number
+
     return len(all_characters)
 
-
-def convert_to_characters(num, index):
-
-    singles = {
-        '0': '',
-        '1': 'one',
-        '2': 'two',
-        '3': 'three',
-        '4': 'four',
-        '5': 'five',
-        '6': 'six',
-        '7': 'seven',
-        '8': 'eight',
-        '9': 'nine'
-    }
-
-    doubles = {
-        '0': '',
-        '1': 'ten',
-        '2': 'twenty',
-        '3': 'thirty',
-        '4': 'fourty',
-        '5': 'fifty',
-        '6': 'sixty',
-        '7': 'seventy',
-        '8': 'eighty',
-        '9': 'ninety'
-    }
-
-    triples = {
-        '0': '',
-        '1': 'onehundredand',
-        '2': 'twohundredand',
-        '3': 'threehundredand',
-        '4': 'fourhundredand',
-        '5': 'fivehundredand',
-        '6': 'sixhundredand',
-        '7': 'sevenhundredand',
-        '8': 'eighthundredand',
-        '9': 'ninehundredand'
-    }
-
-    quad = {
-        '0': '',
-        '1': 'onethousand'
-    }
-
-    if index == 1:
-        return singles[num]
-    elif index == 2:
-        return doubles[num]
-    elif index == 3:
-        return triples[num]
-    elif index == 4:
-        return quad[num]
-    else:
-        return ''
 
 def main():
     print("------ Project Euler ------")
@@ -413,6 +356,7 @@ def main():
     print(" Problem 14:", problem14())
     print(" Problem 15:", problem15())
     print(" Problem 16:", problem16())
+    print(" Problem 17:", problem17())
     print("----------------------------")
 
 
@@ -429,5 +373,4 @@ def test_problem(number, profile=False):
         print(eval(problem_string))
 
 
-# main()
-test_problem('17', False)
+main()
