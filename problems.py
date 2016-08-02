@@ -298,6 +298,102 @@ def problem16():
         total_sum += int(digit)
     return total_sum
 
+def problem17():
+    """
+    Q: If all the numbers from 1 to 1000 (one thousand) inclusive were written
+    out in words, how many letters would be used?
+    A:
+    """
+    special_cases = {
+        '11': 'eleven',
+        '12': 'twelve',
+        '13': 'thirteen',
+        '14': 'fourteen',
+        '15': 'fifteen',
+        '16': 'sixteen',
+        '17': 'seventeen',
+        '18': 'eighteen',
+        '19': 'nineteen'
+    }
+    all_characters = ''
+    for number in range(1, 1001):
+        number = str(number)
+        if number in special_cases:
+            full_number = special_cases[number]
+        else:
+            if number[-2:] in special_cases:
+                full_number = special_cases[number[-2:]]
+                number_to_iterate = number[0] + '00'
+            else:
+                full_number = ''
+                number_to_iterate = number
+
+            idx = len(number_to_iterate)
+            for digit in number_to_iterate:
+                full_number += convert_to_characters(digit, idx)
+                idx -= 1
+
+        print(full_number)
+        all_characters += full_number
+    return len(all_characters)
+
+
+def convert_to_characters(num, index):
+
+    singles = {
+        '0': '',
+        '1': 'one',
+        '2': 'two',
+        '3': 'three',
+        '4': 'four',
+        '5': 'five',
+        '6': 'six',
+        '7': 'seven',
+        '8': 'eight',
+        '9': 'nine'
+    }
+
+    doubles = {
+        '0': '',
+        '1': 'ten',
+        '2': 'twenty',
+        '3': 'thirty',
+        '4': 'fourty',
+        '5': 'fifty',
+        '6': 'sixty',
+        '7': 'seventy',
+        '8': 'eighty',
+        '9': 'ninety'
+    }
+
+    triples = {
+        '0': '',
+        '1': 'onehundredand',
+        '2': 'twohundredand',
+        '3': 'threehundredand',
+        '4': 'fourhundredand',
+        '5': 'fivehundredand',
+        '6': 'sixhundredand',
+        '7': 'sevenhundredand',
+        '8': 'eighthundredand',
+        '9': 'ninehundredand'
+    }
+
+    quad = {
+        '0': '',
+        '1': 'onethousand'
+    }
+
+    if index == 1:
+        return singles[num]
+    elif index == 2:
+        return doubles[num]
+    elif index == 3:
+        return triples[num]
+    elif index == 4:
+        return quad[num]
+    else:
+        return ''
 
 def main():
     print("------ Project Euler ------")
@@ -333,4 +429,5 @@ def test_problem(number, profile=False):
         print(eval(problem_string))
 
 
-main()
+# main()
+test_problem('17', False)
