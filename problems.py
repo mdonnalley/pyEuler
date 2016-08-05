@@ -298,6 +298,45 @@ def problem16():
         total_sum += int(digit)
     return total_sum
 
+def problem17():
+    """
+    Q: If all the numbers from 1 to 1000 (one thousand) inclusive were written
+    out in words, how many letters would be used?
+    A: 21224
+    """
+    special_cases = {
+        '11': 'eleven',
+        '12': 'twelve',
+        '13': 'thirteen',
+        '14': 'fourteen',
+        '15': 'fifteen',
+        '16': 'sixteen',
+        '17': 'seventeen',
+        '18': 'eighteen',
+        '19': 'nineteen'
+    }
+    all_characters = ''
+    for number in range(1, 1001):
+        number = str(number)
+        if number in special_cases:
+            full_number = special_cases[number]
+        else:
+            if number[-2:] in special_cases:
+                full_number = special_cases[number[-2:]]
+                number_to_iterate = number[0] + '00'
+            else:
+                full_number = ''
+                number_to_iterate = number
+
+            idx = len(number_to_iterate)
+            for digit in number_to_iterate:
+                full_number += helpers.convert_to_characters(num=digit, index=idx, original_number=number)
+                idx -= 1
+
+        all_characters += full_number
+
+    return len(all_characters)
+
 
 def main():
     print("------ Project Euler ------")
@@ -317,6 +356,7 @@ def main():
     print(" Problem 14:", problem14())
     print(" Problem 15:", problem15())
     print(" Problem 16:", problem16())
+    print(" Problem 17:", problem17())
     print("----------------------------")
 
 
